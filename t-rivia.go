@@ -85,6 +85,8 @@ func init() {
     b, _, _ := uiFont.GlyphBounds('M')
 	uiFontMHeight = int32((b.Max.Y - b.Min.Y).Ceil())
 		
+	ebiten.SetFullscreen(true)
+	
 	if err != nil {
 		log.Fatal(err)
 	}
