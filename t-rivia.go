@@ -117,49 +117,51 @@ func update(screen *ebiten.Image) error {
 		//printCenter(screen, currentQuestion.Question , 12, color.RGBA{255, 255, 255, 0xff})
 
 		// Player 1 answer A
-		if inpututil.IsKeyJustPressed(ebiten.KeyA) && !player1Answered {
+		if (inpututil.IsKeyJustPressed(ebiten.KeyA) || ebiten.IsGamepadButtonPressed(0, ebiten.GamepadButton0)) && !player1Answered {
 			answerPlayer1 = currentQuestion.AnswerA
 			player1Answered = true
 		}
 		// Player 1 answer B
-		if inpututil.IsKeyJustPressed(ebiten.KeyB) && !player1Answered {
+		if (inpututil.IsKeyJustPressed(ebiten.KeyB) || ebiten.IsGamepadButtonPressed(0, ebiten.GamepadButton1)) && !player1Answered {
 			answerPlayer1 = currentQuestion.AnswerB
 			player1Answered = true
 		}
 		// Player 1 answer C
-		if inpututil.IsKeyJustPressed(ebiten.KeyC) && !player1Answered {
+		if (inpututil.IsKeyJustPressed(ebiten.KeyC) || ebiten.IsGamepadButtonPressed(0, ebiten.GamepadButton2)) && !player1Answered {
 			answerPlayer1 = currentQuestion.AnswerC
 			player1Answered = true
 		}
 		// Player 1 answer D
-		if inpututil.IsKeyJustPressed(ebiten.KeyD) && !player1Answered {
+		if (inpututil.IsKeyJustPressed(ebiten.KeyD) || ebiten.IsGamepadButtonPressed(0, ebiten.GamepadButton3)) && !player1Answered {
 			answerPlayer1 = currentQuestion.AnswerD
 			player1Answered = true
 		}
 
 		// Player 2 answer A
-		if inpututil.IsKeyJustPressed(ebiten.KeyUp) && !player2Answered {
+		if (inpututil.IsKeyJustPressed(ebiten.KeyUp) || ebiten.IsGamepadButtonPressed(1, ebiten.GamepadButton0)) && !player2Answered {
 			answerPlayer2 = currentQuestion.AnswerA
 			player2Answered = true
 		}
 		// Player 2 answer B
-		if inpututil.IsKeyJustPressed(ebiten.KeyRight) && !player2Answered {
+		if (inpututil.IsKeyJustPressed(ebiten.KeyRight)|| ebiten.IsGamepadButtonPressed(1, ebiten.GamepadButton1)) && !player2Answered {
 			answerPlayer2 = currentQuestion.AnswerB
 			player2Answered = true
 		}
 		// Player 2 answer C
-		if inpututil.IsKeyJustPressed(ebiten.KeyLeft) && !player2Answered {
+		if (inpututil.IsKeyJustPressed(ebiten.KeyLeft) || ebiten.IsGamepadButtonPressed(1, ebiten.GamepadButton2)) && !player2Answered {
 			answerPlayer2 = currentQuestion.AnswerC
 			player2Answered = true
 		}
 		// Player 2 answer D
-		if inpututil.IsKeyJustPressed(ebiten.KeyDown) && !player2Answered {
+		if (inpututil.IsKeyJustPressed(ebiten.KeyDown) || ebiten.IsGamepadButtonPressed(1, ebiten.GamepadButton3)) && !player2Answered {
 			answerPlayer2 = currentQuestion.AnswerD
 			player2Answered = true
 		}
 
 		if inpututil.IsKeyJustPressed(ebiten.KeyQ) {
 			resetEverything()
+			screen.Clear()
+			isGameRunning = false
 		}
 
 		if player1Answered && player2Answered {
@@ -225,7 +227,7 @@ func update(screen *ebiten.Image) error {
 		ebitenutil.DebugPrint(screen, "B: 1 pressed!")
 	}
 
-	if ebiten.IsGamepadButtonPressed(0, ebiten.GamepadButton0) && ebiten.IsGamepadButtonPressed(0, ebiten.GamepadButton1) && ebiten.IsGamepadButtonPressed(0, ebiten.GamepadButton2) && ebiten.IsGamepadButtonPressed(0, ebiten.GamepadButton3) {
+	if ebiten.IsGamepadButtonPressed(0, ebiten.GamepadButton0) && ebiten.IsGamepadButtonPressed(0, ebiten.GamepadButton1) && ebiten.IsGamepadButtonPressed(0, ebiten.GamepadButton2) && ebiten.IsGamepadButtonPressed(0, ebiten.GamepadButton3) && ebiten.IsGamepadButtonPressed(1, ebiten.GamepadButton0) && ebiten.IsGamepadButtonPressed(1, ebiten.GamepadButton1) && ebiten.IsGamepadButtonPressed(1, ebiten.GamepadButton2) && ebiten.IsGamepadButtonPressed(1, ebiten.GamepadButton3) {
 		os.Exit(0)
 	}
 
@@ -327,4 +329,6 @@ func resetEverything(){
 	player1Answered = false
 	player2Answered = false
 	displayedText = ""
+	scorePlayer1 = 0
+	scorePlayer2 = 0
 }
