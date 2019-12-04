@@ -187,7 +187,8 @@ func update(screen *ebiten.Image) error {
 				player2Answered = false
 			} else {
 				// Our game is finished! 
-				
+				screen.Clear()
+				displayedText=""
 				if scorePlayer1 > scorePlayer2 {
 					//winnerText = "Player 1 wins!\nPlayer 2 is a loser"
 					printCenter(screen, "Player 1 wins!" , 12, color.RGBA{255, 255, 255, 0xff})
